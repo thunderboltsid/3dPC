@@ -8,8 +8,6 @@
 #include <unistd.h>
 #include <strings.h>
 #include <vector>
-#include <ApplicationServices/ApplicationServices.h>
-#include <Foundation/Foundation.h>
 
 #define MY_PORT		4242
 #define HEIGHT 1080
@@ -20,7 +18,7 @@
 class Server{
 private:
 	int sockfd;
-	struct sockaddr_in self;
+	struct sockaddr_in slf;
 	size_t height;
 	size_t width;
 	char buffer[MAXBUF];
@@ -35,13 +33,13 @@ public:
 		}
 
 		/*---Initialize address/port structure---*/
-		bzero(&self, sizeof(self));
-		self.sin_family = AF_INET;
-		self.sin_port = htons(MY_PORT);
-		self.sin_addr.s_addr = INADDR_ANY;
+		bzero(&slf, sizeof(slf));
+		slf.sin_family = AF_INET;
+		slf.sin_port = htons(MY_PORT);
+		slf.sin_addr.s_addr = INADDR_ANY;
 
 		/*---Assign a port number to the socket---*/
-	    if ( bind(sockfd, (struct sockaddr*)&self, sizeof(self)) != 0 )
+	    if ( bind(sockfd, (struct sockaddr*)&slf, sizeof(slf)) != 0 )
 		{
 			perror("socket--bind");
 			exit(errno);
@@ -70,7 +68,6 @@ public:
 		/*---Forever... ---*/
 		while (1){
 			// read frame buffer;
-			NSScreen *screen = [NSScreen mainScreen];
 
 			// update buffer field 
 

@@ -1,2 +1,2 @@
 all: server.cpp
-	g++ /System/Library/Frameworks/GLUT.framework/GLUT /System/Library/Frameworks/OpenGL.framework/OpenGL server.cpp -o serv
+	g++ server.cpp -o serv

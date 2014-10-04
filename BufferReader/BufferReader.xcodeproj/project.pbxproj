@@ -393,6 +393,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BufferReader/BufferReader-Prefix.pch";
 				INFOPLIST_FILE = "BufferReader/BufferReader-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/abarbarosie/Downloads/OculusSDK/LibOVR/Projects/Mac/Xcode/../../../Lib/Mac/Debug,
+					/Users/abarbarosie/Downloads/OculusSDK/LibOVR/Lib/Mac/Release,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -406,6 +411,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BufferReader/BufferReader-Prefix.pch";
 				INFOPLIST_FILE = "BufferReader/BufferReader-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/abarbarosie/Downloads/OculusSDK/LibOVR/Projects/Mac/Xcode/../../../Lib/Mac/Debug,
+					/Users/abarbarosie/Downloads/OculusSDK/LibOVR/Lib/Mac/Release,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -470,6 +480,7 @@
 				8FC562BC19E017B8006520F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8FC562BD19E017B8006520F7 /* Build configuration list for PBXNativeTarget "BufferReaderTests" */ = {
 			isa = XCConfigurationList;
@@ -478,6 +489,7 @@
 				8FC562BF19E017B8006520F7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -11,11 +11,25 @@
 #include <mutex>
 #include <thread>
 #include "socketClient.h"
+#include <vector>
+
+#define WIDTH 1920
+#define HEIGHT 1080
+
+typedef struct{
+    unsigned char r;
+    unsigned char g;
+    unsigned char b;
+    unsigned char a;
+}Pixel;
+
+std::vector<Pixel> image;
+
 using namespace std;
 std::mutex mtx;
 void client_routine() {
     mtx.lock();
-    SocketClient::getInstance().connect_socket("localhost",4200);
+    SocketClient::getInstance().connect_socket("localhost",4242);
 //    SocketClient::getInstance().send<char>("abc",3);
 //    int* p  = new int[3];
 //    SocketClient::getInstance().send<int>(p,3);
@@ -24,11 +38,15 @@ void client_routine() {
     int* valPtr = new int[1];
     SocketClient::getInstance().receive<int>(valPtr,1);
     int length = valPtr[0];
-    char* buffer = new char[length];
-
+    printf("Lenght: %d\n",length);
+    
+    unsigned char *buf = new unsigned char [length];
+    SocketClient::getInstance().receive<unsigned char>(buf,length);
+    
+    delete [] buf;
     delete valPtr;
-    delete[] buffer;
     mtx.unlock();
+    sleep(20);
 }
 
 int main ()

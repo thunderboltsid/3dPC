@@ -31,9 +31,11 @@ class SocketClient {
         //returns sockfd
         SocketClient() {sockfd = -1;}
         void connect_socket(char* hostname, int portno) {
+            /*
             if (sockfd > 0) {
                 close(sockfd);
             }
+            */
             int n;
             struct sockaddr_in serv_addr;
             struct hostent *server;
@@ -57,10 +59,9 @@ class SocketClient {
             bcopy((char *)server->h_addr,
                    (char *)&serv_addr.sin_addr.s_addr,
                         server->h_length);
+
             serv_addr.sin_port = htons(portno);
-
             /* Now connect to the server */
-
             if (::connect(sockfd,(struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
             {
                  perror("ERROR connecting");
