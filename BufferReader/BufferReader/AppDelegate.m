@@ -12,7 +12,24 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    // Insert code here to initialize your application
+    NSScreen *screen = [NSScreen mainScreen];
+    NSRect frame = screen.frame;
+    NSNumber *screenNr = [screen.deviceDescription valueForKey:@"NSScreenNumber"];
+    
+    NSImageView *view = [[NSImageView alloc] initWithFrame:CGRectMake(0, 0, 400, 400)];
+    [self.window.contentView addSubview:view];
+    CGImageRef ref;
+    
+    ref = CGWindowListCreateImage(frame, nil, [screenNr unsignedIntegerValue], nil);
+    NSSize size;
+    size.height = frame.size.height;
+    size.width = frame.size.width;
+    view.image = [[NSImage alloc] initWithCGImage:ref size:size];
+    
+    sleep(2);
+    
+    ref = CGWindowListCreateImage(frame, nil, [screenNr unsignedIntegerValue], nil);
+    view.image = [[NSImage alloc] initWithCGImage:ref size:size];
 }
 
 @end

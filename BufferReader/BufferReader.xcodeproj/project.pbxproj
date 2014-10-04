@@ -18,6 +18,7 @@
 		8FC562AD19E017B8006520F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FC5628C19E017B7006520F7 /* Cocoa.framework */; };
 		8FC562B519E017B8006520F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8FC562B319E017B8006520F7 /* InfoPlist.strings */; };
 		8FC562B719E017B8006520F7 /* BufferReaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8FC562B619E017B8006520F7 /* BufferReaderTests.m */; };
+		8FC562C119E01A7F006520F7 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FC562C019E01A7F006520F7 /* CoreGraphics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		8FC562B219E017B8006520F7 /* BufferReaderTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BufferReaderTests-Info.plist"; sourceTree = "<group>"; };
 		8FC562B419E017B8006520F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8FC562B619E017B8006520F7 /* BufferReaderTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BufferReaderTests.m; sourceTree = "<group>"; };
+		8FC562C019E01A7F006520F7 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8FC562C119E01A7F006520F7 /* CoreGraphics.framework in Frameworks */,
 				8FC5628D19E017B7006520F7 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +98,7 @@
 		8FC5628B19E017B7006520F7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8FC562C019E01A7F006520F7 /* CoreGraphics.framework */,
 				8FC5628C19E017B7006520F7 /* Cocoa.framework */,
 				8FC562AB19E017B8006520F7 /* XCTest.framework */,
 				8FC5628E19E017B7006520F7 /* Other Frameworks */,
