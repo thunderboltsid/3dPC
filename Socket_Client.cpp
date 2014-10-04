@@ -1,3 +1,4 @@
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -6,7 +7,9 @@
 #include <unistd.h>
 #include <netdb.h>
 #include <string.h>
-
+#include <cstdlib>
+#include <pthread.h>
+using namespace std;
 class SocketClient {
     private:
         char* hostname;
@@ -20,9 +23,15 @@ class SocketClient {
             static SocketClient instance; // Guaranteed to be de
             return instance;
         }
+        static int getSockfd() {
+            return SocketClient::getInstance().sockfd;
+        }
         //returns sockfd
-        SocketClient() {};
+        SocketClient() {sockfd = -1;}
         void connect_socket(char* hostname, int portno) {
+            if (sockfd > 0) {
+                close(sockfd);
+            }
             int n;
             struct sockaddr_in serv_addr;
             struct hostent *server;
@@ -77,6 +86,33 @@ class SocketClient {
                 return 0;
         }
 
+};
+
+void* client_routine(void* thread_id) {
+    SocketClient::getInstance().connect_socket("localhost",3001);
+    SocketClient::getInstance().send<char>("abc",3);
+    int* p  = new int[3];
+    SocketClient::getInstance().send<int>(p,3);
+    char* buffer = new char[30];
+    SocketClient::getInstance().receive<char>(buffer, 29);
+    pthread_exit(NULL);
+}
+
+int main ()
+{
+   pthread_t* thread = new pthread_t;
+   int rc;
+   int i=0;
+   rc = pthread_create(thread, NULL,
+                      client_routine, (void *)i);
+   if (rc){
+     cout << "Error:unable to create thread," << rc << endl;
+     exit(-1);
+   }
+
+   pthread_exit(NULL);
+}
+
         // zero -> ok; -1 ->  bad
 //        int sendCharBuff(char* buffer) {;
 ////            bzero(buffer,256);
@@ -121,15 +157,3 @@ class SocketClient {
 //            else
 //                return 0;
 //        }
-
-};
-
-int main(int argc, int* argv) {
-    SocketClient::getInstance().connect_socket("localhost",3001);
-    SocketClient::getInstance().send<char>("abc",3);
-    int* p  = new int[3];
-    SocketClient::getInstance().send<int>(p,3);
-    char* buffer = new char[30];
-    SocketClient::getInstance().receive<char>(buffer, 29);
-    return 0;
-}
