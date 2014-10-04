@@ -8,7 +8,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
+@interface AppDelegate : NSObject <NSApplicationDelegate>{
+    NSScreen *screen;
+    NSRect frame;
+    NSNumber *screenNr;
+    NSSize size;
+    NSImageView *view;
+}
 
 @property (assign) IBOutlet NSWindow *window;
 
