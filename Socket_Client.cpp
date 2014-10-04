@@ -8,7 +8,8 @@
 #include <netdb.h>
 #include <string.h>
 #include <cstdlib>
-#include <pthread.h>
+#include <mutex>
+#include <thread>
 using namespace std;
 class SocketClient {
     private:
@@ -85,32 +86,36 @@ class SocketClient {
             else
                 return 0;
         }
+        template <class T>
+        int receive2D(T** arr, int& height, int& width) {
+            int* p = new int[2];
+            receive<int>(p,2);
+            height = p[0];
+            width = p[1];
+            arr = new T*[height];
+            for (int i = 0; i<height; i++) {
+                arr[i] = new T[width];
+                receive<int>(arr[i], width);
+            }
+        }
 
 };
-
-void* client_routine(void* thread_id) {
+std::mutex mtx;
+void client_routine() {
+    mtx.lock();
     SocketClient::getInstance().connect_socket("localhost",3001);
     SocketClient::getInstance().send<char>("abc",3);
     int* p  = new int[3];
     SocketClient::getInstance().send<int>(p,3);
     char* buffer = new char[30];
     SocketClient::getInstance().receive<char>(buffer, 29);
-    pthread_exit(NULL);
+    mtx.unlock();
 }
 
 int main ()
 {
-   pthread_t* thread = new pthread_t;
-   int rc;
-   int i=0;
-   rc = pthread_create(thread, NULL,
-                      client_routine, (void *)i);
-   if (rc){
-     cout << "Error:unable to create thread," << rc << endl;
-     exit(-1);
-   }
-
-   pthread_exit(NULL);
+    std::thread curr_thread(client_routine);
+    curr_thread.join();
 }
 
         // zero -> ok; -1 ->  bad
